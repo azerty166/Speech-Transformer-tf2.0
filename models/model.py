@@ -22,7 +22,7 @@ class Speech_transformer(tf.keras.Model):
         return final_out,attention_weights
 
 if __name__=='__main__':
-    configfile = open('D:\pycharm_proj\Speech_Transformer\config\hparams.yaml')
+    configfile = open('/Users/nicdemai/Desktop/Masters Thesis/Speech-Transformer-tf2.0/config/hparams.yaml')
     config = AttrDict(yaml.load(configfile, Loader=yaml.FullLoader))
     print(config.data_name)
     inputs = np.random.randn(32,233,80,3)

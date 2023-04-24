@@ -1,9 +1,13 @@
 import tensorflow as tf
 import numpy as np
-from layers import EncoderLayer
 import matplotlib.pyplot as plt
-from positional_encoding import positional_encoding
 
+if __name__ == '__main__':
+    from layers import EncoderLayer
+    from positional_encoding import positional_encoding
+else:
+    from modules.layers import EncoderLayer
+    from modules.positional_encoding import positional_encoding
 
 class Encoder(tf.keras.Model):
     def __init__(self, num_layers, d_model, num_heads, dff, pe_max_len,name,

@@ -1,6 +1,9 @@
 import tensorflow as tf
 import numpy as np
-from attention import MultiHeadAttention
+if __name__ == '__main__':
+    from attention import MultiHeadAttention
+else:
+    from modules.attention import MultiHeadAttention
 
 def point_wise_feed_forward_network(d_model, dff):
   return tf.keras.Sequential([
