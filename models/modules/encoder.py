@@ -20,7 +20,7 @@ class Encoder(tf.keras.Model):
         self.input_proj = tf.keras.models.Sequential(name='en_proj')
         self.input_proj.add(tf.keras.layers.Dense(units=self.d_model,kernel_initializer='glorot_normal'))
         # self.input_proj.add(tf.keras.layers.Dropout(rate=dp))
-        self.input_proj.add(tf.keras.layers.experimental.LayerNormalization(epsilon=1e-6))
+        self.input_proj.add(tf.keras.layers.LayerNormalization(epsilon=1e-6))
 
         self.dropout = tf.keras.layers.Dropout(rate=0.1, name='en_proj_dp')
 

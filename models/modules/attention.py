@@ -1,6 +1,8 @@
 import tensorflow as tf
 import numpy as np
 
+RANDOM_NORMAL_SEED = 42
+
 def scaled_dot_product_attention(q, k, v, mask):
     """Calculate the attention weights.
     q, k, v must have matching leading dimensions.
@@ -61,7 +63,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.depth = d_model // self.num_heads
 
         # https://github.com/kaituoxu/Speech-Transformer/blob/master/src/transformer/attention.py#L19
-        init  = tf.keras.initializers.RandomNormal(mean=0,stddev=np.sqrt(2.0 / (d_model + self.depth)))
+        init  = tf.keras.initializers.RandomNormal(mean=0,stddev=np.sqrt(2.0 / (d_model + self.depth)), seed=RANDOM_NORMAL_SEED)
         # init = tf.keras.initializers.glorot_normal()
         self.wq = tf.keras.layers.Dense(d_model,kernel_initializer=init) # (feature_in_dim, d_model) 第一维不是batchsize因为可以broadcast
         self.wk = tf.keras.layers.Dense(d_model,kernel_initializer=init) # (feature_in_dim, d_model)
@@ -229,3 +231,4 @@ if __name__=='__main__':
     y = tf.random.uniform((1, 60, 512))  # (batch_size, encoder_sequence, d_model)
     out, attn = temp_mha(y, k=y, q=y, mask=None)
     print(out.shape, attn.shape)
+    
